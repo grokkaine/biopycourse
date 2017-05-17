@@ -1,0 +1,7 @@
+
+        for f in ctl1_counts.txt ctl2_counts.txt
+        do
+			cat $f >> merged.txt
+		done
+
+        

@@ -1,0 +1,32 @@
+SAMPLES = ['ctl1', 'ctl2']
+
+wdir = "/home/sergiu/data/work/course/short/data/snake/"
+
+rule all:
+    input:
+        'merged.txt'
+
+rule acounts:
+    input:
+        file='{sample}.fastq'
+    output:
+        '{sample}_counts.txt'
+    run:
+        with open(input.file, 'r') as f:
+            nc = [str(l.count('A')) for l in f if not l[0]=='@']
+        data = ', '.join(nc)+'\n'
+        with open(output[0], 'w') as f: f.write(data)
+
+rule merge:
+    input:
+        counts=expand('{sample}_counts.txt',sample=SAMPLES)
+    output:
+        'merged.txt'
+    shell:
+        """
+        for f in {input.counts}
+        do
+			cat $f >> {output}
+		done
+
+        """
