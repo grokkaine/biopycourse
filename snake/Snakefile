@@ -1,6 +1,6 @@
 SAMPLES = ['ctl1', 'ctl2']
 
-wdir = "/home/sergiu/data/work/course/short/data/snake/"
+wdir = "/Users/salendrapradh/biopycourse/snake"
 
 rule all:
     input:
